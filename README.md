@@ -141,7 +141,7 @@ After opening the application, users can:
 
 The project was implemented according to a Figma design:
 
-[View the Figma design]([http://PASTE_YOUR_FIGMA_LINK_HERE](https://www.figma.com/design/WMdJ24eHk4EkSr25mrt7Y2/Phone-catalog--V2--Original-Dark?node-id=0-1&p=f&t=pTBYgn4W4ZHt3eqN-0))
+[View the Figma design](https://www.figma.com/design/WMdJ24eHk4EkSr25mrt7Y2/Phone-catalog--V2--Original-Dark?node-id=0-1&p=f&t=pTBYgn4W4ZHt3eqN-0)
 
 ## Application Pages
 
