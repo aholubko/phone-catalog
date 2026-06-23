@@ -95,13 +95,13 @@ Follow these steps to install and run the project locally.
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/aholubko/landing-page.git
+git clone https://github.com/aholubko/phone-catalog.git
 ``` 
 
 ### 2. Navigate to the project directory
 
 ```bash
-cd landing-page 
+cd phone-catalog 
 ```
 
 ### 3. Install dependencies
