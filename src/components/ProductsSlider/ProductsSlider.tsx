@@ -6,9 +6,14 @@ import './ProductsSlider.scss';
 type Props = {
   title: string;
   products: Product[];
+  showDiscount?: boolean;
 };
 
-export const ProductsSlider = ({ title, products }: Props) => {
+export const ProductsSlider = ({
+  title,
+  products,
+  showDiscount = true,
+}: Props) => {
   const [startIndex, setStartIndex] = useState(0);
   const visibleProducts = products.slice(startIndex, startIndex + 4);
   const canGoPrev = startIndex > 0;
@@ -42,7 +47,11 @@ export const ProductsSlider = ({ title, products }: Props) => {
 
       <div className="products-slider__list">
         {visibleProducts.map(product => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard
+            key={product.id}
+            product={product}
+            showDiscount={showDiscount}
+          />
         ))}
       </div>
     </section>

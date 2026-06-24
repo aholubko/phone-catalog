@@ -9,9 +9,10 @@ import { getImageUrl } from '../../utils/getImageUrl';
 
 type Props = {
   product: Product;
+  showDiscount?: boolean;
 };
 
-export const ProductCard = ({ product }: Props) => {
+export const ProductCard = ({ product, showDiscount = true }: Props) => {
   const { cart, addToCart } = useContext(CartContext);
   const { toggleFavorite, isFavorite } = useContext(FavoritesContext);
   const { theme } = useContext(ThemeContext);
@@ -31,8 +32,12 @@ export const ProductCard = ({ product }: Props) => {
       </Link>
 
       <div className="product-card__prices">
-        <span className="product-card__price">${product.price}</span>
-        <span className="product-card__full-price">${product.fullPrice}</span>
+        <span className="product-card__price">
+          ${showDiscount ? product.price : product.fullPrice}
+        </span>
+        {showDiscount && product.price !== product.fullPrice && (
+          <span className="product-card__full-price">${product.fullPrice}</span>
+        )}
       </div>
 
       <div className="product-card__specs">

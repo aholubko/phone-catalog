@@ -40,6 +40,14 @@ export const ProductDetailsPage = () => {
 
   //#region useEffect
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+
+      behavior: 'smooth',
+    });
+  }, [productId]);
+
+  useEffect(() => {
     const loadProduct = async () => {
       if (!productId) {
         return;
@@ -134,7 +142,7 @@ export const ProductDetailsPage = () => {
       <button
         type="button"
         className="product-details__back"
-        onClick={() => navigate(-1)}
+        onClick={() => navigate(`/${product.category}`)}
       >
         <img
           className={

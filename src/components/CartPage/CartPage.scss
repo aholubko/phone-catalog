@@ -20,10 +20,39 @@
     font-weight: 800;
     line-height: 56px;
   }
+    &__items {
+      margin-bottom: 80px;
 
-  &__items {
-    margin-bottom: 80px;
-  }
+      .cart-item {
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease,
+          border-color 0.3s ease;
+      }
+
+      @media (hover: hover) {
+        .cart-item:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 10px 24px rgb(0 0 0 / 18%);
+          border-color: var(--color-primary);
+        }
+      }
+
+      .cart-item__remove {
+        transition:
+          transform 0.25s ease,
+          opacity 0.25s ease;
+      }
+
+      .cart-item__remove:hover {
+        transform: scale(1.18) rotate(6deg);
+        opacity: 0.8;
+      }
+
+      .cart-item__remove:active {
+        transform: scale(0.95);
+      }
+    }
 
   &__summary {
     padding: 24px;

@@ -23,6 +23,15 @@
     width: 80px;
     height: 26px;
 
+    transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+
+    &:hover {
+      opacity: 0.8;
+      transform: scale(1.04);
+    }
+
     img {
       width: 80px;
       height: 26px;
@@ -46,6 +55,27 @@
     text-transform: uppercase;
     font-size: 12px;
     font-weight: 800;
+
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: var(--color-primary);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 100%;
+      bottom: -4px;
+      height: 2px;
+      background-color: var(--color-primary);
+      transition: right 0.3s ease;
+    }
+
+    &:hover::after {
+      right: 0;
+    }
   }
 
   &__button {
@@ -56,6 +86,17 @@
     background: none;
     border: none;
     cursor: pointer;
+
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: var(--color-primary);
+    }
+
+    &:hover .footer__button-icon {
+      transform: translateY(-3px);
+      background-color: var(--color-surface2);
+    }
 
     @media (max-width: 639px) {
     justify-content: center;
@@ -72,13 +113,18 @@
     height: 32px;
     background-color: var(--color-icons);
 
-    body.light-theme & {
-      background: $color-light-white;
-      border: 1px solid $color-light-elements;
-    }
+    transition:
+      transform 0.3s ease,
+      background-color 0.3s ease,
+      border-color 0.3s ease;
 
-    body.light-theme &:hover {
-      border: 1px solid $color-dark-surface2;
-    }
+      body.light-theme & {
+        background: $color-light-white;
+        border: 1px solid $color-light-elements;
+      }
+
+      body.light-theme .footer__button:hover & {
+        border-color: $color-dark-surface2;
+      }
   }
 }

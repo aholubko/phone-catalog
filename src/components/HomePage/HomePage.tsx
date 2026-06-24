@@ -55,7 +55,11 @@ export const HomePage = () => {
       </section>
 
       <section className="home-page__section">
-        <ProductsSlider title="Brand new models" products={brandNewProducts} />
+        <ProductsSlider
+          title="Brand new models"
+          products={brandNewProducts}
+          showDiscount={false}
+        />
       </section>
 
       <section className="home-page__section">
@@ -111,7 +115,11 @@ export const HomePage = () => {
       </section>
 
       <section className="home-page__section">
-        <ProductsSlider title="Hot prices" products={hotPriceProducts} />
+        <ProductsSlider
+          title="Hot prices"
+          products={hotPriceProducts}
+          showDiscount={true}
+        />
       </section>
     </>
   );

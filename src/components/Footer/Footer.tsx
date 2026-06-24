@@ -36,11 +36,16 @@ export const Footer = () => {
           Github
         </a>
 
-        <a href="#" className="footer__link">
+        <a href="mailto:your-email@example.com" className="footer__link">
           Contacts
         </a>
 
-        <a href="#" className="footer__link">
+        <a
+          href="https://github.com/aholubko/phone-catalog/blob/main/LICENSE"
+          className="footer__link"
+          target="_blank"
+          rel="noreferrer"
+        >
           Rights
         </a>
       </nav>

@@ -1,5 +1,5 @@
 import './ProductsPage.scss';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { Product } from '../../types/Product';
 import { ProductList } from '../ProductList';
@@ -32,8 +32,10 @@ export const ProductsPage = ({ title, loadProducts }: Props) => {
   const [sortType, setSortType] = useState(sortFromUrl);
   const [currentPage, setCurrentPage] = useState(pageFromUrl);
   const [perPage, setPerPage] = useState(perPageFromUrl);
+  const [isUpdating, setIsUpdating] = useState(false);
   //#endregion
 
+  const updateTimer = useRef<number | null>(null);
   const debounceQuery = useDebounce(queryFromUrl, 500);
 
   const loadPageProducts = useCallback(async () => {
@@ -66,6 +68,24 @@ export const ProductsPage = ({ title, loadProducts }: Props) => {
     });
 
     setSearchParams(params);
+  };
+
+  const imitatePageUpdate = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+
+    setIsUpdating(true);
+
+    if (updateTimer.current !== null) {
+      window.clearTimeout(updateTimer.current);
+    }
+
+    updateTimer.current = window.setTimeout(() => {
+      setIsUpdating(false);
+      updateTimer.current = null;
+    }, 400);
   };
 
   //#region Derived products
@@ -103,15 +123,25 @@ export const ProductsPage = ({ title, loadProducts }: Props) => {
     loadPageProducts();
   }, [loadPageProducts]);
 
+  useEffect(() => {
+    return () => {
+      if (updateTimer.current !== null) {
+        window.clearTimeout(updateTimer.current);
+      }
+    };
+  }, []);
+
+  const showLoader = isLoading || isUpdating;
+
   return (
     <>
       <section className="products-page">
         <div className="products-page__top">
           <h1 className="products-page__title">{title}</h1>
 
-          {isLoading && <Loader />}
+          {showLoader && <Loader />}
 
-          {!isLoading && errorMessage && (
+          {!showLoader && errorMessage && (
             <>
               <p>{errorMessage}</p>
 
@@ -131,6 +161,7 @@ export const ProductsPage = ({ title, loadProducts }: Props) => {
             sortType={sortType}
             perPage={perPage}
             onSortChange={newSortType => {
+              imitatePageUpdate();
               setSortType(newSortType);
               setCurrentPage(1);
               updateSearchParams({
@@ -139,6 +170,7 @@ export const ProductsPage = ({ title, loadProducts }: Props) => {
               });
             }}
             onPerPageChange={newPerPage => {
+              imitatePageUpdate();
               setPerPage(newPerPage);
               setCurrentPage(1);
               updateSearchParams({
@@ -149,26 +181,33 @@ export const ProductsPage = ({ title, loadProducts }: Props) => {
           />
         </div>
 
-        {!isLoading && !errorMessage && (
+        {!showLoader && !errorMessage && (
           <>
             {visibleProducts.length ? (
-              <>
-                <ProductList products={paginatedProducts} />
+              <div className="products-page__content">
+                <div className="products-page__list">
+                  <ProductList products={paginatedProducts} />
+                </div>
 
-                <Pagination
-                  totalPages={totalPages}
-                  currentPage={currentPage}
-                  onPageChange={newPage => {
-                    setCurrentPage(newPage);
+                <div className="products-page__pagination">
+                  <Pagination
+                    totalPages={totalPages}
+                    currentPage={currentPage}
+                    onPageChange={newPage => {
+                      imitatePageUpdate();
+                      setCurrentPage(newPage);
 
-                    updateSearchParams({
-                      page: newPage === 1 ? null : String(newPage),
-                    });
-                  }}
-                />
-              </>
+                      updateSearchParams({
+                        page: newPage === 1 ? null : String(newPage),
+                      });
+                    }}
+                  />
+                </div>
+              </div>
             ) : (
-              <p>There are no products matching the query</p>
+              <p className="products-page__empty">
+                There are no products matching the query
+              </p>
             )}
           </>
         )}

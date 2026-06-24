@@ -43,6 +43,15 @@
     margin-left: 24px;
     margin-right: 48px;
 
+    transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+
+    &:hover {
+      opacity: 0.8;
+      transform: scale(1.04);
+    }
+
     img {
       display: block;
       width: 80px;
@@ -94,18 +103,23 @@
   }
 
   &__icon {
-      position: relative;
-      display: none;
+    position: relative;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 100%;
+    border-left: 1px solid var(--color-icons);
 
-      @include on-desktop {
-        display: flex;
-      }
+    transition: background-color 0.3s ease;
 
-      align-items: center;
-      justify-content: center;
-      width: 64px;
-      height: 100%;
-      border-left: 1px solid var(--color-icons);
+    @include on-desktop {
+      display: flex;
+    }
+
+    img {
+      transition: transform 0.3s ease;
+    }
 
     &::after {
       content: '';
@@ -121,11 +135,16 @@
       background-color: var(--color-surface);
     }
 
+    &:hover img {
+      transform: scale(1.12);
+    }
+
     &--active {
       &::after {
         background-color: var(--color-primary);
       }
     }
+
   }
 
   &__counter {
@@ -156,6 +175,12 @@
     border: none;
     border-left: 1px solid var(--color-icons);
     cursor: pointer;
+
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: var(--color-surface);
+    }
 
     @include on-desktop {
       display: none;
@@ -255,6 +280,16 @@
     border-left: 1px solid var(--color-elements);
     cursor: pointer;
 
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: var(--color-surface);
+    }
+
+    &:hover img {
+      transform: rotate(20deg) scale(1.1);
+    }
+
     @include on-desktop {
       width: $header-desktop-height;
     }
@@ -262,6 +297,7 @@
     img {
       width: 20px;
       height: 20px;
+      transition: transform 0.3s ease;
     }
   }
 
@@ -277,6 +313,16 @@
     border-left: 1px solid var(--color-elements);
     cursor: pointer;
 
+    transition: background-color 0.3s ease;
+
+    &:hover img {
+      transform: scale(1.15);
+    }
+
+    &:hover {
+    background-color: var(--color-surface);
+  }
+
     @include on-desktop {
       width: $header-desktop-height;
     }
@@ -284,6 +330,7 @@
     img {
       width: 16px;
       height: 16px;
+      transition: transform 0.3s ease;
     }
   }
 }
