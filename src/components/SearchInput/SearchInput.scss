@@ -17,6 +17,13 @@
     font-weight: 600;
     outline: none;
 
+  &::-webkit-search-decoration,
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-results-button,
+  &::-webkit-search-results-decoration {
+    appearance: none;
+    display: none;
+  }
     &:focus {
       border-color: var(--color-accent);
     }

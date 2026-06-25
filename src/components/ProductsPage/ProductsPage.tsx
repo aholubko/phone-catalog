@@ -119,6 +119,19 @@ export const ProductsPage = ({ title, loadProducts }: Props) => {
   const totalPages = Math.ceil(visibleProducts.length / productsPerPage);
   //#endregion
 
+  const isFirstSearchRender = useRef(true);
+
+  useEffect(() => {
+    if (isFirstSearchRender.current) {
+      isFirstSearchRender.current = false;
+
+      return;
+    }
+
+    setCurrentPage(1);
+    imitatePageUpdate();
+  }, [debounceQuery]);
+
   useEffect(() => {
     loadPageProducts();
   }, [loadPageProducts]);
@@ -205,9 +218,17 @@ export const ProductsPage = ({ title, loadProducts }: Props) => {
                 </div>
               </div>
             ) : (
-              <p className="products-page__empty">
-                There are no products matching the query
-              </p>
+              <div className="products-page__empty">
+                <img
+                  className="products-page__empty-image"
+                  src="img/product-not-found.png"
+                  alt="Product not found"
+                />
+
+                <h2 className="products-page__empty-title">
+                  There are no products matching the query
+                </h2>
+              </div>
             )}
           </>
         )}

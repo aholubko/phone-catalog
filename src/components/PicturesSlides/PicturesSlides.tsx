@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './PicturesSlides.scss';
+import { Link } from 'react-router-dom';
 
 const images = [
   'img/banner-phones.svg',
@@ -42,20 +43,36 @@ export const PicturesSlides = () => {
         </button>
 
         <div className="pictures-slider__image-wrapper">
-          <picture>
-            {activeIndex === 0 && (
-              <source
-                media="(max-width: 639px)"
-                srcSet="img/banner-mobile.svg"
-              />
-            )}
+          {activeIndex === 0 ? (
+            <Link
+              to="/product/apple-iphone-14-256gb-purple"
+              className="pictures-slider__image-link"
+              aria-label="View phones"
+            >
+              <picture>
+                <source
+                  media="(max-width: 639px)"
+                  srcSet="img/banner-mobile.svg"
+                />
 
-            <img
-              className="pictures-slider__image"
-              src={images[activeIndex]}
-              alt="Banner"
-            />
-          </picture>
+                <img
+                  key={images[activeIndex]}
+                  className="pictures-slider__image"
+                  src={images[activeIndex]}
+                  alt="Order phones"
+                />
+              </picture>
+            </Link>
+          ) : (
+            <picture>
+              <img
+                key={images[activeIndex]}
+                className="pictures-slider__image"
+                src={images[activeIndex]}
+                alt="Banner"
+              />
+            </picture>
+          )}
         </div>
 
         <button

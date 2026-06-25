@@ -2,8 +2,9 @@
 @import '../../styles/mixins';
 
 .navbar {
-  position: relative;
-  z-index: $z-mobile-menu;
+  position: sticky;
+  top: 0;
+  z-index: $z-navbar;
   display: flex;
   justify-content: space-between;
   align-items: center;
